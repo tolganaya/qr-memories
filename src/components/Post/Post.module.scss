@@ -73,11 +73,6 @@ $blue: #4361ee;
   }
 }
 
-.tags {
-  list-style: none;
-  padding: 0;
-  margin: 5px 0 0 0;
-
   li {
     display: inline-block;
     font-size: 14px;
@@ -93,7 +88,6 @@ $blue: #4361ee;
       color: #000;
     }
   }
-}
 
 .postDetails {
   list-style: none;
@@ -139,14 +133,6 @@ $blue: #4361ee;
   }
 }
 
-.skeletonTags {
-  display: flex;
-
-  span {
-    margin-right: 15px;
-  }
-}
-
 .editButtons {
   position: absolute;
   right: 15px;
@@ -155,4 +141,8 @@ $blue: #4361ee;
   border-radius: 10px;
   opacity: 0;
   transition: all 0.15s ease-in-out;
+}
+
+.qr-style {
+  padding-bottom: 3em;
 }

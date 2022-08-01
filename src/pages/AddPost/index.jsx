@@ -12,6 +12,7 @@ import axios from '../../axios';
 import styles from './AddPost.module.scss';
 
 
+
 export const AddPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -19,7 +20,6 @@ export const AddPost = () => {
   const [isLoading, setLoading] = React.useState(false);
   const [text, setText] = React.useState('');
   const [title, setTitle] = React.useState('');
-  const [tags, setTags] = React.useState('');
   const [imageUrl, setImageUrl] = React.useState('');
   const inputFileRef = React.useRef(null);
 
@@ -53,7 +53,6 @@ export const AddPost = () => {
       const fields = {
         title,
         imageUrl,
-        tags,
         text,
       }
       const { data } = isEditing ? await axios.patch(`/posts/${id}`, fields) : await axios.post('/posts', fields);
@@ -62,7 +61,7 @@ export const AddPost = () => {
       navigate(`/posts/${_id}`);
     } catch (err) {
       console.warn(err);
-      alert('Ошибка при создании статьи!')
+      alert('Ошибка при создании QR-код страницы!')
     }
   };
 
@@ -74,10 +73,9 @@ export const AddPost = () => {
           setTitle(data.title);
           setText(data.text);
           setImageUrl(data.imageUrl);
-          setTags(data.tags.join(','));
         }).catch((err) => {
           console.warn(err);
-          alert('Ошибка при получении статьи!');
+          alert('Ошибка при получении QR-код страницы!');
         })
     }
   }, [])
@@ -104,7 +102,7 @@ export const AddPost = () => {
   return (
     <Paper style={{ padding: 30 }}>
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
-        Загрузить превью
+        Загрузить фото
       </Button>
       <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
@@ -120,22 +118,15 @@ export const AddPost = () => {
       <TextField
         classes={{ root: styles.title }}
         variant="standard"
-        placeholder="Заголовок статьи..."
+        placeholder="Заголовок страницы..."
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
       />
-      <TextField
-        value={tags}
-        onChange={(e) => setTags(e.target.value)}
-        classes={{ root: styles.tags }}
-        variant="standard"
-        placeholder="Тэги"
-        fullWidth />
       <SimpleMDE className={styles.editor} value={text} onChange={onChange} options={options} />
       <div className={styles.buttons}>
         <Button onClick={onSubmit} size="large" variant="contained">
-          {isEditing ? 'Сохранить' : 'Опубликовать'}
+          {isEditing ? 'Сохранить' : 'Создать страницу'}
         </Button>
         <a href="/">
           <Button size="large">Отмена</Button>
