@@ -13,6 +13,7 @@ import QRCodeStyling from "qr-code-styling";
 import IconButton from '@mui/material/IconButton';
 import DownloadingIcon from '@mui/icons-material/Downloading';
 
+const url = (process.env.NODE_ENV==="development" ? "http://localhost:3000" : process.env.REACT_APP_WEB_URL)
 
 const qrCode = new QRCodeStyling({
   width: 300,
@@ -54,7 +55,7 @@ export const QrPost = () => {
 
   useEffect(() => {
     qrCode.update({
-      data: `${process.env.PORT}/posts/${id}`
+      data: `${url}/posts/${id}`
     });
   }, [id]);
 
@@ -129,7 +130,7 @@ const styles = {
     
 //       <QRCode 
 //       className=""
-//       value={`${process.env.PORT}/posts/${id}`} />
+//       value={`${process.env.API_URL}/posts/${id}`} />
 //     </>
 //   );
 // };
