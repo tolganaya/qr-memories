@@ -12,7 +12,6 @@ import axios from '../../axios';
 import styles from './AddPost.module.scss';
 
 
-
 export const AddPost = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -21,17 +20,18 @@ export const AddPost = () => {
   const [text, setText] = React.useState('');
   const [title, setTitle] = React.useState('');
   const [imageUrl, setImageUrl] = React.useState('');
+  const [imageUrls, setImageUrls] = React.useState('');
   const inputFileRef = React.useRef(null);
-
   const isEditing = Boolean(id);
 
   const handleChangeFile = async (event) => {
     try {
       const formData = new FormData();
       const files = event.target.files;
-      Array.from(files).forEach( file => formData.append('image', file));
+      Array.from(files).forEach(file => formData.append('image', file));
       const { data } = await axios.post('/upload', formData);
-      setImageUrl(data.url);
+      setImageUrl(data.urls[0]);
+      setImageUrls(data.urls);
     } catch (err) {
       console.warn(err);
       alert('Ошибка при загрузке файла!')
@@ -40,6 +40,10 @@ export const AddPost = () => {
 
   const onClickRemoveImage = () => {
     setImageUrl('');
+  };
+
+  const onClickRight = (id) => {
+    setImageUrls(id);
   };
 
   const onChange = React.useCallback((value) => {
@@ -104,7 +108,8 @@ export const AddPost = () => {
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
         Загрузить фото
       </Button>
-      <input ref={inputFileRef} multiple type="file" onChange={handleChangeFile} hidden />
+      <input ref={inputFileRef} multiple type="file" onChange={handleChangeFile} />
+      {/* hidden */}
       {imageUrl && (
         <>
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
@@ -113,6 +118,14 @@ export const AddPost = () => {
           <img className={styles.image} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="Uploaded" />
         </>
       )}
+      (
+      <>
+        <Button variant="outlined" color="error" onClick={onClickRight}>
+          {imageUrls[0]}
+        </Button>
+        <img className={styles.image} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="Uploaded" />
+      </>
+      )
       <br />
       <br />
       <TextField
