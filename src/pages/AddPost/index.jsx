@@ -28,8 +28,8 @@ export const AddPost = () => {
   const handleChangeFile = async (event) => {
     try {
       const formData = new FormData();
-      const file = event.target.files[0];
-      formData.append('image', file);
+      const files = event.target.files;
+      Array.from(files).forEach( file => formData.append('image', file));
       const { data } = await axios.post('/upload', formData);
       setImageUrl(data.url);
     } catch (err) {
@@ -104,7 +104,7 @@ export const AddPost = () => {
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
         Загрузить фото
       </Button>
-      <input ref={inputFileRef} type="file" onChange={handleChangeFile} hidden />
+      <input ref={inputFileRef} multiple type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
         <>
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
