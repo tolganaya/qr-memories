@@ -18,9 +18,9 @@ export const Registration = () => {
   const { register, handleSubmit, formState: { errors, isValid }
   } = useForm({
     defaultValues: {
-      fullName: 'John Hopkins',
-      email: 'john@test.kz',
-      password: '1234',
+      fullName: ' Temir Azamatuly',
+      email: 'temir@gmail.com',
+      password: '123456',
     },
     mode: 'onChange',
   });
