@@ -54,7 +54,7 @@ export const QrPost = () => {
 
   useEffect(() => {
     qrCode.update({
-      data: `${process.env.PORT}/posts/${id}`
+      data: `${process.env.API_URL}/posts/${id}`
     });
   }, [id]);
 
@@ -129,7 +129,7 @@ const styles = {
     
 //       <QRCode 
 //       className=""
-//       value={`${process.env.PORT}/posts/${id}`} />
+//       value={`${process.env.API_URL}/posts/${id}`} />
 //     </>
 //   );
 // };
