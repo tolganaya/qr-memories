@@ -129,7 +129,7 @@ const styles = {
     
 //       <QRCode 
 //       className=""
-//       value={`${process.env.REACT_APP_API_URL}/posts/${id}`} />
+//       value={`${process.env.PORT}/posts/${id}`} />
 //     </>
 //   );
 // };
