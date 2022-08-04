@@ -108,8 +108,7 @@ export const AddPost = () => {
       <Button onClick={() => inputFileRef.current.click()} variant="outlined" size="large">
         Загрузить фото
       </Button>
-      <input ref={inputFileRef} multiple type="file" onChange={handleChangeFile} />
-      {/* hidden */}
+      <input ref={inputFileRef} multiple type="file" onChange={handleChangeFile} hidden />
       {imageUrl && (
         <>
           <Button variant="contained" color="error" onClick={onClickRemoveImage}>
@@ -118,14 +117,6 @@ export const AddPost = () => {
           <img className={styles.image} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="Uploaded" />
         </>
       )}
-      (
-      <>
-        <Button variant="outlined" color="error" onClick={onClickRight}>
-          {imageUrls[0]}
-        </Button>
-        <img className={styles.image} src={`${process.env.REACT_APP_API_URL}${imageUrl}`} alt="Uploaded" />
-      </>
-      )
       <br />
       <br />
       <TextField
