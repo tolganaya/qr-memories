@@ -43,11 +43,6 @@ export const Post = ({
         <div className={clsx(styles.root, { [styles.rootFull]: isFullPost })}>
           {isEditable && (
             <div className={styles.editButtons}>
-              <Link to={`/posts/${id}/qr`}>
-                <IconButton color="success">
-                  <QrCodeIcon />
-                </IconButton>
-              </Link>
               <Link to={`/posts/${id}/edit`}>
                 <IconButton color="primary">
                   <EditIcon />
@@ -74,8 +69,15 @@ export const Post = ({
               </h2>
               {children && <div className={styles.content}>{children}</div>}
               <ul className={styles.postDetails}>
+                <li>QR-code: </li>
+                <Link to={`/posts/${id}/qr`}>
+                  <IconButton color="success">
+                    <QrCodeIcon />
+                  </IconButton>
+                </Link>
               </ul>
             </div>
+
           </div>
         </div>
       </div>

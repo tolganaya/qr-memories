@@ -13,6 +13,12 @@ import QRCodeStyling from "qr-code-styling";
 import IconButton from '@mui/material/IconButton';
 import DownloadingIcon from '@mui/icons-material/Downloading';
 
+import NavbarPost from "../../components/NavbarPost/NavbarPost";
+import Video from "../../components/Video/Video";
+import Footer from "../../components/Footer/Footer";
+import styles from './QrPost.module.scss';
+import Paper from "@mui/material/Paper";
+
 const url = (process.env.NODE_ENV==="development" ? "http://localhost:3000" : process.env.REACT_APP_WEB_URL)
 
 const qrCode = new QRCodeStyling({
@@ -70,34 +76,32 @@ export const QrPost = () => {
   };
 
   return (
-    <div className="App">
-      <div style={styles.inputWrapper}>
-        <select onChange={onExtensionChange} value={fileExt}>
-          <option value="png">PNG</option>
-          <option value="jpeg">JPEG</option>
-          <option value="webp">WEBP</option>
-        </select>
-        <IconButton onClick={onDownloadClick} color="inherit">
-          <DownloadingIcon />
-        </IconButton>
+    <>
+      <div className={styles.hero}>
+        <NavbarPost />
+        <Video />
+        <div className={styles.emptySpace}>
+        <Paper classes={{ root: styles.root }}>
+          <div className={styles.App}>
+            <div style={styles.inputWrapper}>
+              <select onChange={onExtensionChange} value={fileExt}>
+                <option value="png">PNG</option>
+                <option value="jpeg">JPEG</option>
+                <option value="webp">WEBP</option>
+              </select>
+              <IconButton onClick={onDownloadClick} color="inherit">
+                <DownloadingIcon />
+              </IconButton>
+            </div>
+          <div ref={ref} />
+        </div>
+        </Paper>
+        </div>
       </div>
-      <div ref={ref} />
-    </div>
+      <Footer />
+    </>
   );
 }
-
-const styles = {
-  inputWrapper: {
-    margin: "20px 0",
-    display: "flex",
-    justifyContent: "flex-start",
-    width: "100%"
-  },
-  inputBox: {
-    flexGrow: 1,
-    marginRight: 20
-  }
-};
 
 
 
